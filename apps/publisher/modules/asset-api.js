@@ -201,8 +201,10 @@ var result;
         return assetReq;
     };
     var processTags = function (assetReq) {
-        var tags = assetReq._tags || '';
-        return tags.split(',');
+        if (assetReq._tags) {
+            return tags.split(',');
+        }
+        return null;
     };
 
     var validateEditableFeilds = function (type, assetReq) {
@@ -266,7 +268,7 @@ var result;
             return null;
         }
         //Attempt to apply tags
-        if (tags.length > 0) {
+        if (tags) {
             am.addTags(asset.id, tags);
         }
         //Check if lifecycles are enabled
